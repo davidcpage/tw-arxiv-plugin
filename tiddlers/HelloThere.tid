@@ -1,0 +1,37 @@
+created: 20170811140802881
+modified: 20170811152216745
+title: HelloThere
+type: text/vnd.tiddlywiki
+
+This is a [[TiddlyWiki5|http://tiddlywiki.com/]] plugin for organising papers from the [[arxiv|https://arxiv.org/]].
+
+! Installation
+
+To add the plugin to your own TiddlyWiki5, just drag this link to the browser window:
+
+[[$:/plugins/dcp/arxiv]]
+
+You will probably want to install the [[KaTeX|http://tiddlywiki.com/plugins/tiddlywiki/katex/]] plugin as well.
+
+! Using the plugin
+
+!!!General
+
+Papers that you add will appear listed by publication date in the Timeline tab in the side panel.
+Authors that you add are listed under the Author tab.
+
+!!! Fetch the latest papers
+
+Use [[$:/plugins/dcp/arxiv/latest]] to pull the latest papers from the arxiv for a list of categories.
+Papers will be tagged 'new' when they are imported, to help tracking them. This can be deleted manually to mark as read.
+
+!!! Get a list of papers by id
+Use [[$:/plugins/dcp/arxiv/get-by-id]] to fetch a list of papers by arxiv id.
+
+!!! Authors and aliases
+Add author tiddlers based on this template: [[Albert Einstein]]. These will show up as links from the author's name in paper tiddlers and will link back to those papers. 
+
+If the same author publishes under various variations of their name, you can add aliases based on this template: [[A. Einstein]]. These point on to the main author page and allow that to link back to the relevant papers. 
+
+!!! Styling
+Edit [[$:/plugins/dcp/arxiv/stylesheet.css]] to adjust the colours or other styling for papers in different arxiv categories.
