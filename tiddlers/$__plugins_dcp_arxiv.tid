@@ -1,32 +1,41 @@
 created: 20170807093858562
 description: A plugin for organising papers from the arxiv.
-modified: 20170811153819696
+modified: 20170812135117794
 plugin-type: plugin
 title: $:/plugins/dcp/arxiv
 type: application/json
-version: 0.0.10
+version: 0.0.11
 
 {
     "tiddlers": {
         "$:/plugins/dcp/arxiv/paper-template": {
-            "created": "20170807092108167",
+            "text": "<$list filter=\"[list[!!authors]first[]]\"><$link><<currentTiddler>></$link></$list><$list filter=\"[list[!!authors]butfirst[]]\">, <$link><<currentTiddler>></$link></$list>\n\n{{!!abstract}}\n\n{{!!link}}",
+            "bag": "default",
+            "revision": "5",
+            "type": "text/vnd.tiddlywiki",
             "title": "$:/plugins/dcp/arxiv/paper-template",
-            "modified": "20170809081545741",
-            "text": "\\define arxiv_link(type: \"pdf\") \n<a class=tc-tiddlylink href=\"http://arxiv.org/$type$/$(id)$\" target=\"_blank\">$type$</a>\n\\end \n\n<$list filter=\"[list[!!arxiv_authors]first[]]\"><$link><<currentTiddler>></$link></$list><$list filter=\"[list[!!arxiv_authors]butfirst[]]\">, <$link><<currentTiddler>></$link></$list>\n\n{{!!arxiv_abstract}}\n\n<$set name=id value={{!!arxiv_id}}> \n<<arxiv_link \"pdf\">>\n</$set> "
+            "modified": "20170812134320458",
+            "created": "20170807092108167"
         },
         "$:/plugins/dcp/arxiv/author-template": {
-            "created": "20170807092148033",
+            "text": "\\define concat(str) $str$\n\nPapers:\n<ul>\n<$list filter=\"[regexp:authors<currentTiddler>]\">\n<li><$link><<currentTiddler>></$link></li>\n</$list>\n\n<$set name=\"aliases\" filter=[all[current]backlinks[]tag[alias]]>\n<$list filter=<<aliases>>>\n<$list filter=\"[regexp:authors<currentTiddler>]\">\n<li><$link><<currentTiddler>></$link></li>\n</$list>\n</$list>\n</$set>\n</ul>\n\n<$set name=\"url\" value=<<concat \"https://scholar.google.co.uk/scholar?hl=en&q=$(currentTiddler)$\">>>\n<a class=tc-tiddlylink href=<<url>> target=\"_blank\">Google scholar</a>\n</$set>",
+            "bag": "default",
+            "revision": "2",
+            "type": "text/vnd.tiddlywiki",
             "title": "$:/plugins/dcp/arxiv/author-template",
-            "modified": "20170809081518496",
-            "text": "\\define concat(str) $str$\n\nPapers:\n<ul>\n<$list filter=\"[regexp:arxiv_authors<currentTiddler>]\">\n<li><$link><<currentTiddler>></$link></li>\n</$list>\n\n<$set name=\"aliases\" filter=[all[current]backlinks[]tag[alias]]>\n<$list filter=<<aliases>>>\n<$list filter=\"[regexp:arxiv_authors<currentTiddler>]\">\n<li><$link><<currentTiddler>></$link></li>\n</$list>\n</$list>\n</$set>\n</ul>\n\n<$set name=\"url\" value=<<concat \"https://scholar.google.co.uk/scholar?hl=en&q=$(currentTiddler)$\">>>\n<a class=tc-tiddlylink href=<<url>> target=\"_blank\">Google scholar</a>\n</$set>"
+            "modified": "20170812132540342",
+            "created": "20170807092148033"
         },
         "$:/plugins/dcp/arxiv/ViewTemplate": {
-            "created": "20170807091656419",
+            "text": "<$list filter=\"[all[current]tag[author]]\">\n<$transclude tiddler=\"$:/plugins/dcp/arxiv/author-template\"/>\n</$list>\n\n<$list filter=\"[all[current]has[abstract]]\">\n<$transclude tiddler=\"$:/plugins/dcp/arxiv/paper-template\" mode=\"block\"/>\n</$list>",
+            "bag": "default",
+            "revision": "1",
+            "type": "text/vnd.tiddlywiki",
             "title": "$:/plugins/dcp/arxiv/ViewTemplate",
-            "modified": "20170809081345237",
-            "text": "<$list filter=\"[all[current]tag[author]]\">\n<$transclude tiddler=\"$:/plugins/dcp/arxiv/author-template\"/>\n</$list>\n\n<$list filter=\"[all[current]has[arxiv_id]]\">\n<$transclude tiddler=\"$:/plugins/dcp/arxiv/paper-template\" mode=\"block\"/>\n</$list>",
+            "tags": "$:/tags/ViewTemplate",
+            "modified": "20170812134824945",
             "list-after": "$:/core/ui/ViewTemplate/tags",
-            "tags": "$:/tags/ViewTemplate"
+            "created": "20170807091656419"
         },
         "$:/plugins/dcp/arxiv/stylesheet.css": {
             "created": "20170807091505972",
@@ -38,35 +47,39 @@ version: 0.0.10
             "list-after": "$:/themes/tiddlywiki/vanilla/base"
         },
         "$:/plugins/dcp/arxiv/Timeline": {
-            "text": "<div style=\"overflow-x:auto;\">\n<$list filter=\"[has[arxiv_date]each[arxiv_date]!sort[arxiv_date]]\">\n  <div class=\"tc-menu-list-item\">\n{{!!arxiv_date}}\n<$list filter=\"[field:arxiv_date{!!arxiv_date}!tag[new]]\">\n<div class=\"tc-menu-list-subitem\">\n<$link><<currentTiddler>></$link>\n</div>\n</$list>\n</div>\n</$list>\n</div>\n",
+            "text": "<div style=\"overflow-x:auto;\">\n<$list filter=\"[has[date]!tag[new]each[date]!sort[date]]\">\n  <div class=\"tc-menu-list-item\">\n{{!!date}}\n<$list filter=\"[field:date{!!date}!tag[new]]\">\n<div class=\"tc-menu-list-subitem\">\n<$link><<currentTiddler>></$link>\n</div>\n</$list>\n</div>\n</$list>\n</div>\n",
             "bag": "default",
-            "revision": "1",
+            "revision": "3",
             "type": "text/vnd.tiddlywiki",
             "title": "$:/plugins/dcp/arxiv/Timeline",
             "tags": "$:/tags/SideBar",
-            "modified": "20170810103041121",
+            "modified": "20170812134642989",
             "list-before": "$:/core/ui/SideBar/Open",
             "created": "20170807092442805",
             "caption": "Timeline"
         },
         "$:/plugins/dcp/arxiv/Authors": {
-            "created": "20170807092752213",
-            "title": "$:/plugins/dcp/arxiv/Authors",
-            "modified": "20170807093001320",
             "text": "<$list filter=\"[tag[author]sort[sort-name]]\">\n<div class=\"tc-menu-list-item\">\n<$link>{{!!title}}</$link>\n</div>\n</$list>",
-            "caption": "Authors",
-            "list-before": "$:/core/ui/SideBar/Open",
-            "tags": "$:/tags/SideBar"
-        },
-        "$:/plugins/dcp/arxiv/action-getarxiv.js": {
-            "text": "(function() {\n    \"use strict\";\n\n    function toTiddler(entry,mark_as_new) {\n        function format(s) {\n            return s.trim().replace(/\\s+|\\$|\\`/g, matched => {\n                return matched === \"$\" ? \"$$\" : matched === \"`\" ? \"'\" : \" \";\n            });\n        }\n        var cat =  entry[\"arxiv:primary_category\"][0][\"$\"][\"term\"].replace(\n                    /\\./g,\n                    \"-\"\n                );\n        var tid = {\n            title: format(entry.title[0]),\n            tags: mark_as_new ?  \"new \" + cat : cat,\n            arxiv_id: entry.id[0].slice(-12, -2),\n            arxiv_abstract: format(entry.summary[0]),\n            arxiv_authors: entry.author\n                .map(function(author) {\n                    return \"[[\" + author[\"name\"][0] + \"]]\";\n                })\n                .join(\" \"),\n            arxiv_date: new Date(entry.published[0]).toISOString().slice(2, 10)\n        };\n        return tid;\n    }\n\n    function xmlToJson(xml) {\n        var obj = {};\n        if (xml.nodeType == 3) {\n            obj = xml.nodeValue;\n        }\n        if (xml.nodeType == 1) {\n            // element\n            // do attributes\n            if (xml.attributes.length > 0) {\n                obj[\"$\"] = {};\n                for (var j = 0; j < xml.attributes.length; j++) {\n                    var attribute = xml.attributes.item(j);\n                    obj[\"$\"][attribute.nodeName] = attribute.nodeValue;\n                }\n            }\n        }\n        if (xml.hasChildNodes()) {\n            if (xml.childNodes.length == 1) {\n                var item = xml.childNodes.item(0);\n                obj = xmlToJson(item);\n            } else {\n                for (var i = 0; i < xml.childNodes.length; i++) {\n                    var item = xml.childNodes.item(i);\n                    var nodeName = item.nodeName;\n                    if (typeof obj[nodeName] == \"undefined\") {\n                        obj[nodeName] = [];\n                    }\n                    obj[nodeName].push(xmlToJson(item));\n                }\n            }\n        }\n        return obj;\n    }\n\n    function httpRequest(url) {\n        return new Promise((resolve, reject) => {\n            return $tw.utils.httpRequest({\n                url: url,\n                callback: function(err, data) {\n                    resolve(data);\n                }\n            });\n        });\n    }\n\n    function fetch(search_query) {\n        var url = `http://export.arxiv.org/api/query?${search_query}`;\n        return httpRequest(url).then(data => {\n            var parser = new DOMParser();\n            var xmlDoc = parser.parseFromString(data, \"text/xml\");\n            var jsonDoc = xmlToJson(xmlDoc);\n            return jsonDoc[\"entry\"];\n        });\n    }\n\n    (\"use strict\");\n\n    var Widget = require(\"$:/core/modules/widgets/widget.js\").widget;\n\n    var ArxivWidget = function(parseTreeNode, options) {\n        this.initialise(parseTreeNode, options);\n    };\n\n    ArxivWidget.prototype = new Widget();\n\n    ArxivWidget.prototype.render = function(parent, nextSibling) {\n        this.computeAttributes();\n        this.execute();\n    };\n\n    ArxivWidget.prototype.execute = function() {\n        this.actionCategories = this.getAttribute(\"$categories\");\n        this.actionCutoff = this.getAttribute(\"$cutoff\");\n        this.actionMaxResults = this.getAttribute(\"$max_results\");\n        this.actionIdList = this.getAttribute(\"$id_list\") || \"\";\n    };\n\n    ArxivWidget.prototype.refresh = function(changedTiddlers) {\n        var changedAttributes = this.computeAttributes();\n        if (\n            changedAttributes[\"$categories\"] ||\n            changedAttributes[\"$cutoff\"] ||\n            changedAttributes[\"$maxResults\"] ||\n            changedAttributes[\"$id_list\"]\n        ) {\n            this.refreshSelf();\n            return true;\n        }\n        return this.refreshChildren(changedTiddlers);\n    };\n\n    ArxivWidget.prototype.invokeAction = function(triggeringWidget, event) {\n        $tw.wiki.addTiddler({\n            title: \"$:/Import\",\n            text: \"Waiting for arxiv...\"\n        });\n\n        var all_results; \n        var mark_as_new = true;\n\n        if (this.actionIdList !== \"\") {\n            mark_as_new = false;\n            var id_list = this.actionIdList.replace(/\\s+/g, \",\");\n            all_results = fetch(`id_list=${id_list}`);\n        } else {\n            var categories = this.actionCategories.split(\" \");\n            var cutoff = this.actionCutoff;\n            var max_results = this.actionMaxResults;\n            var new_cutoff = cutoff;\n            var searches = categories.map(cat => {\n                var search_query = `search_query=cat:${cat}&max_results=${max_results}&sortBy=submittedDate&sortOrder=descending`;          \n                return fetch(search_query);\n            });\n            all_results = Promise.all(searches).then(results => {\n                results = Array.prototype.concat.apply([], results);\n                var filtered = [];\n                results.forEach(function(entry) {\n                    var id = entry.id[0].slice(-12, -2);\n                    if (id > cutoff) {\n                        filtered.push(entry);\n                        if (id > new_cutoff) {\n                            new_cutoff = id;\n                        }\n                    }\n                });\n                $tw.wiki.addTiddler({\n                    title: \"$:/plugins/dcp/arxiv/cutoff\",\n                    text: \"\",\n                    value: new_cutoff\n                });\n                return filtered;\n            });\n        }\n\n        all_results.then(results => {\n            var tiddlers = {};\n            results.forEach(function(entry) {\n                var tid = toTiddler(entry,mark_as_new);\n                tiddlers[tid.title] = tid;\n            });\n\n            var tiddlers_string = JSON.stringify({\n                tiddlers: tiddlers\n            });\n\n            $tw.wiki.addTiddler({\n                title: \"$:/Import\",\n                text: tiddlers_string,\n                type: \"application/json\",\n                \"plugin-type\": \"import\",\n                status: \"pending\"\n            });\n        });\n        return true; // Action was invoked\n    };\n\n    exports[\"action-getarxiv\"] = ArxivWidget;\n})();",
             "bag": "default",
             "revision": "1",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/plugins/dcp/arxiv/Authors",
+            "tags": "$:/tags/SideBar",
+            "modified": "20170812132548623",
+            "list-before": "$:/core/ui/SideBar/Open",
+            "created": "20170807092752213",
+            "caption": "Authors"
+        },
+        "$:/plugins/dcp/arxiv/action-getarxiv.js": {
+            "text": "(function() {\n    \"use strict\";\n\n    function toTiddler(entry,mark_as_new) {\n        function format(s) {\n            return s.trim().replace(/\\s+|\\$|\\`/g, matched => {\n                return matched === \"$\" ? \"$$\" : matched === \"`\" ? \"'\" : \" \";\n            });\n        }\n        var cat =  entry[\"arxiv:primary_category\"][0][\"$\"][\"term\"].replace(\n                    /\\./g,\n                    \"-\"\n                );\n        var id = entry.id[0].slice(-12, -2);\n        var published = new Date(entry.published[0]).toISOString();\n        var tid = {\n            title: format(entry.title[0]),\n            tags: mark_as_new ?  \"new \" + cat : cat,\n            id: id,\n            abstract: format(entry.summary[0]),\n            authors: entry.author\n                .map(function(author) {\n                    return \"[[\" + author[\"name\"][0] + \"]]\";\n                })\n                .join(\" \"),\n            year: published.slice(0,4),\n            date: published.slice(2,10),\n            journal: \"arXiv\",\n            link: `https://arxiv.org/pdf/${id}`\n        };\n        return tid;\n    }\n\n    function xmlToJson(xml) {\n        var obj = {};\n        if (xml.nodeType == 3) {\n            obj = xml.nodeValue;\n        }\n        if (xml.nodeType == 1) {\n            // element\n            // do attributes\n            if (xml.attributes.length > 0) {\n                obj[\"$\"] = {};\n                for (var j = 0; j < xml.attributes.length; j++) {\n                    var attribute = xml.attributes.item(j);\n                    obj[\"$\"][attribute.nodeName] = attribute.nodeValue;\n                }\n            }\n        }\n        if (xml.hasChildNodes()) {\n            if (xml.childNodes.length == 1) {\n                var item = xml.childNodes.item(0);\n                obj = xmlToJson(item);\n            } else {\n                for (var i = 0; i < xml.childNodes.length; i++) {\n                    var item = xml.childNodes.item(i);\n                    var nodeName = item.nodeName;\n                    if (typeof obj[nodeName] == \"undefined\") {\n                        obj[nodeName] = [];\n                    }\n                    obj[nodeName].push(xmlToJson(item));\n                }\n            }\n        }\n        return obj;\n    }\n\n    function httpRequest(url) {\n        return new Promise((resolve, reject) => {\n            return $tw.utils.httpRequest({\n                url: url,\n                callback: function(err, data) {\n                    resolve(data);\n                }\n            });\n        });\n    }\n\n    function fetch(search_query) {\n        var url = `http://export.arxiv.org/api/query?${search_query}`;\n        return httpRequest(url).then(data => {\n            var parser = new DOMParser();\n            var xmlDoc = parser.parseFromString(data, \"text/xml\");\n            var jsonDoc = xmlToJson(xmlDoc);\n            return jsonDoc[\"entry\"];\n        });\n    }\n\n    (\"use strict\");\n\n    var Widget = require(\"$:/core/modules/widgets/widget.js\").widget;\n\n    var ArxivWidget = function(parseTreeNode, options) {\n        this.initialise(parseTreeNode, options);\n    };\n\n    ArxivWidget.prototype = new Widget();\n\n    ArxivWidget.prototype.render = function(parent, nextSibling) {\n        this.computeAttributes();\n        this.execute();\n    };\n\n    ArxivWidget.prototype.execute = function() {\n        this.actionCategories = this.getAttribute(\"$categories\");\n        this.actionCutoff = this.getAttribute(\"$cutoff\");\n        this.actionMaxResults = this.getAttribute(\"$max_results\");\n        this.actionIdList = this.getAttribute(\"$id_list\") || \"\";\n    };\n\n    ArxivWidget.prototype.refresh = function(changedTiddlers) {\n        var changedAttributes = this.computeAttributes();\n        if (\n            changedAttributes[\"$categories\"] ||\n            changedAttributes[\"$cutoff\"] ||\n            changedAttributes[\"$maxResults\"] ||\n            changedAttributes[\"$id_list\"]\n        ) {\n            this.refreshSelf();\n            return true;\n        }\n        return this.refreshChildren(changedTiddlers);\n    };\n\n    ArxivWidget.prototype.invokeAction = function(triggeringWidget, event) {\n        $tw.wiki.addTiddler({\n            title: \"$:/Import\",\n            text: \"Waiting for arxiv...\"\n        });\n\n        var all_results; \n        var mark_as_new = true;\n\n        if (this.actionIdList !== \"\") {\n            mark_as_new = false;\n            var id_list = this.actionIdList.replace(/\\s+/g, \",\");\n            all_results = fetch(`id_list=${id_list}`);\n        } else {\n            var categories = this.actionCategories.split(\" \");\n            var cutoff = this.actionCutoff;\n            var max_results = this.actionMaxResults;\n            var new_cutoff = cutoff;\n            var searches = categories.map(cat => {\n                var search_query = `search_query=cat:${cat}&max_results=${max_results}&sortBy=submittedDate&sortOrder=descending`;          \n                return fetch(search_query);\n            });\n            all_results = Promise.all(searches).then(results => {\n                results = Array.prototype.concat.apply([], results);\n                var filtered = [];\n                results.forEach(function(entry) {\n                    var id = entry.id[0].slice(-12, -2);\n                    if (id > cutoff) {\n                        filtered.push(entry);\n                        if (id > new_cutoff) {\n                            new_cutoff = id;\n                        }\n                    }\n                });\n                $tw.wiki.addTiddler({\n                    title: \"$:/plugins/dcp/arxiv/cutoff\",\n                    text: \"\",\n                    value: new_cutoff\n                });\n                return filtered;\n            });\n        }\n\n        all_results.then(results => {\n            var tiddlers = {};\n            results.forEach(function(entry) {\n                var tid = toTiddler(entry,mark_as_new);\n                tiddlers[tid.title] = tid;\n            });\n\n            var tiddlers_string = JSON.stringify({\n                tiddlers: tiddlers\n            });\n\n            $tw.wiki.addTiddler({\n                title: \"$:/Import\",\n                text: tiddlers_string,\n                type: \"application/json\",\n                \"plugin-type\": \"import\",\n                status: \"pending\"\n            });\n        });\n        return true; // Action was invoked\n    };\n\n    exports[\"action-getarxiv\"] = ArxivWidget;\n})();",
+            "bag": "default",
+            "revision": "4",
             "type": "application/javascript",
             "title": "$:/plugins/dcp/arxiv/action-getarxiv.js",
             "tags": "",
             "module-type": "widget",
-            "modified": "20170811153237418",
+            "modified": "20170812134123716",
+            "lin": "",
             "created": "20170809132642929"
         },
         "$:/plugins/dcp/arxiv/categories": {
@@ -81,23 +94,23 @@ version: 0.0.10
             "created": "20170809142820354"
         },
         "$:/plugins/dcp/arxiv/cutoff": {
-            "created": "20170811153255213",
             "text": "",
             "bag": "default",
-            "revision": "3",
+            "revision": "11",
             "value": "1708.00000",
             "type": "text/vnd.tiddlywiki",
             "title": "$:/plugins/dcp/arxiv/cutoff",
-            "modified": "20170811153758428"
+            "modified": "20170812135005632",
+            "created": "20170812135003562"
         },
         "$:/plugins/dcp/arxiv/latest": {
             "text": "<div> ''categories:'' <br>\n<$edit-text size=30 tiddler=\"$:/plugins/dcp/arxiv/categories\" field=\"value\"/> \n,,space separated list ,,\n</div>\n<div> ''cutoff:'' <br> \n<$edit-text  tiddler=\"$:/plugins/dcp/arxiv/cutoff\" field=\"value\"/>\n,,only keep id's above this one,,\n</div>\n\n<$button>\n<$action-getarxiv $categories={{$:/plugins/dcp/arxiv/categories!!value}} $cutoff={{$:/plugins/dcp/arxiv/cutoff!!value}} $max_results=100/>\n<$action-navigate $to=\"$:/Import\"/>\nFetch from arxiv\n</$button>\n\n<$button class=\"tc-btn-invisible tc-tiddlylink\" >\n<$list filter = \"[!is[system]tag[new]count[]]\"/> new\n<$list filter=\"[!is[system]tag[new]sort[tags]limit[200]]\" variable=\"tid\">\n<$action-navigate $to=<<tid>>/>\n</$list>\n</$button>",
             "bag": "default",
-            "revision": "22",
+            "revision": "2",
             "type": "text/vnd.tiddlywiki",
             "title": "$:/plugins/dcp/arxiv/latest",
             "tags": "",
-            "modified": "20170811151646418",
+            "modified": "20170812134249050",
             "created": "20170809150532766"
         },
         "$:/plugins/dcp/arxiv/id_list": {
@@ -113,11 +126,11 @@ version: 0.0.10
         "$:/plugins/dcp/arxiv/get-by-id": {
             "text": "''arxiv IDs:'' <br>\n<$edit-text  tiddler=\"$:/plugins/dcp/arxiv/id_list\" field=\"value\"/> ,,space separated list,,\n\n<$button>\n<$action-getarxiv $id_list={{$:/plugins/dcp/arxiv/id_list!!value}}}/>\n<$action-navigate $to=\"$:/Import\"/>\nFetch from arxiv\n</$button>",
             "bag": "default",
-            "revision": "3",
+            "revision": "1",
             "type": "text/vnd.tiddlywiki",
             "title": "$:/plugins/dcp/arxiv/get-by-id",
             "tags": "",
-            "modified": "20170811151540114",
+            "modified": "20170812132619035",
             "created": "20170811142420454"
         }
     }
