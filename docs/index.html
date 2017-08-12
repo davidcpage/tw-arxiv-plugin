@@ -8375,17 +8375,17 @@ Error message and password prompt
 <div title="$:/isEncrypted" revision="0" bag="default">
 <pre>no</pre>
 </div>
-<div created="20170807093858562" description="A plugin for organising papers from the arxiv." modified="20170812135117794" plugin-type="plugin" title="$:/plugins/dcp/arxiv" type="application/json" version="0.0.11" revision="0" bag="default">
+<div created="20170807093858562" description="A plugin for organising papers from the arxiv." modified="20170812144614925" plugin-type="plugin" title="$:/plugins/dcp/arxiv" type="application/json" version="0.0.12" revision="0" bag="default">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/plugins/dcp/arxiv/paper-template&quot;: {
-            &quot;text&quot;: &quot;&lt;$list filter=\&quot;[list[!!authors]first[]]\&quot;&gt;&lt;$link&gt;&lt;&lt;currentTiddler&gt;&gt;&lt;/$link&gt;&lt;/$list&gt;&lt;$list filter=\&quot;[list[!!authors]butfirst[]]\&quot;&gt;, &lt;$link&gt;&lt;&lt;currentTiddler&gt;&gt;&lt;/$link&gt;&lt;/$list&gt;\n\n{{!!abstract}}\n\n{{!!link}}&quot;,
+            &quot;created&quot;: &quot;20170807092108167&quot;,
+            &quot;text&quot;: &quot;&lt;$list filter=\&quot;[list[!!authors]first[]]\&quot;&gt;&lt;$link&gt;&lt;&lt;currentTiddler&gt;&gt;&lt;/$link&gt;&lt;/$list&gt;&lt;$list filter=\&quot;[list[!!authors]butfirst[]]\&quot;&gt;, &lt;$link&gt;&lt;&lt;currentTiddler&gt;&gt;&lt;/$link&gt;&lt;/$list&gt;\n\n{{!!abstract}}\n\n&lt;$set name=\&quot;url\&quot; value={{!!link}}&gt;\n&lt;a class='tc-tiddlylink-external' target='_blank' href=&lt;&lt;url&gt;&gt;&gt; pdf &lt;/a&gt;\n&lt;/$set&gt;&quot;,
             &quot;bag&quot;: &quot;default&quot;,
             &quot;revision&quot;: &quot;5&quot;,
             &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
             &quot;title&quot;: &quot;$:/plugins/dcp/arxiv/paper-template&quot;,
-            &quot;modified&quot;: &quot;20170812134320458&quot;,
-            &quot;created&quot;: &quot;20170807092108167&quot;
+            &quot;modified&quot;: &quot;20170812144551005&quot;
         },
         &quot;$:/plugins/dcp/arxiv/author-template&quot;: {
             &quot;text&quot;: &quot;\\define concat(str) $str$\n\nPapers:\n&lt;ul&gt;\n&lt;$list filter=\&quot;[regexp:authors&lt;currentTiddler&gt;]\&quot;&gt;\n&lt;li&gt;&lt;$link&gt;&lt;&lt;currentTiddler&gt;&gt;&lt;/$link&gt;&lt;/li&gt;\n&lt;/$list&gt;\n\n&lt;$set name=\&quot;aliases\&quot; filter=[all[current]backlinks[]tag[alias]]&gt;\n&lt;$list filter=&lt;&lt;aliases&gt;&gt;&gt;\n&lt;$list filter=\&quot;[regexp:authors&lt;currentTiddler&gt;]\&quot;&gt;\n&lt;li&gt;&lt;$link&gt;&lt;&lt;currentTiddler&gt;&gt;&lt;/$link&gt;&lt;/li&gt;\n&lt;/$list&gt;\n&lt;/$list&gt;\n&lt;/$set&gt;\n&lt;/ul&gt;\n\n&lt;$set name=\&quot;url\&quot; value=&lt;&lt;concat \&quot;https://scholar.google.co.uk/scholar?hl=en&amp;q=$(currentTiddler)$\&quot;&gt;&gt;&gt;\n&lt;a class=tc-tiddlylink href=&lt;&lt;url&gt;&gt; target=\&quot;_blank\&quot;&gt;Google scholar&lt;/a&gt;\n&lt;/$set&gt;&quot;,
