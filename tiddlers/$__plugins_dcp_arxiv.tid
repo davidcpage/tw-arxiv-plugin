@@ -1,21 +1,21 @@
 created: 20170807093858562
 description: A plugin for organising papers from the arxiv.
-modified: 20170812144614925
+modified: 20170812150919017
 plugin-type: plugin
 title: $:/plugins/dcp/arxiv
 type: application/json
-version: 0.0.12
+version: 0.0.13
 
 {
     "tiddlers": {
         "$:/plugins/dcp/arxiv/paper-template": {
             "created": "20170807092108167",
-            "text": "<$list filter=\"[list[!!authors]first[]]\"><$link><<currentTiddler>></$link></$list><$list filter=\"[list[!!authors]butfirst[]]\">, <$link><<currentTiddler>></$link></$list>\n\n{{!!abstract}}\n\n<$set name=\"url\" value={{!!link}}>\n<a class='tc-tiddlylink-external' target='_blank' href=<<url>>> pdf </a>\n</$set>",
+            "text": "<<author-list>>\n\n{{!!abstract}}\n\n<$set name=\"url\" value={{!!link}}>\n<a class='tc-tiddlylink-external' target='_blank' href=<<url>>> pdf </a>\n</$set>",
             "bag": "default",
             "revision": "5",
             "type": "text/vnd.tiddlywiki",
             "title": "$:/plugins/dcp/arxiv/paper-template",
-            "modified": "20170812144551005"
+            "modified": "20170812150824521"
         },
         "$:/plugins/dcp/arxiv/author-template": {
             "text": "\\define concat(str) $str$\n\nPapers:\n<ul>\n<$list filter=\"[regexp:authors<currentTiddler>]\">\n<li><$link><<currentTiddler>></$link></li>\n</$list>\n\n<$set name=\"aliases\" filter=[all[current]backlinks[]tag[alias]]>\n<$list filter=<<aliases>>>\n<$list filter=\"[regexp:authors<currentTiddler>]\">\n<li><$link><<currentTiddler>></$link></li>\n</$list>\n</$list>\n</$set>\n</ul>\n\n<$set name=\"url\" value=<<concat \"https://scholar.google.co.uk/scholar?hl=en&q=$(currentTiddler)$\">>>\n<a class=tc-tiddlylink href=<<url>> target=\"_blank\">Google scholar</a>\n</$set>",
@@ -132,6 +132,13 @@ version: 0.0.12
             "tags": "",
             "modified": "20170812132619035",
             "created": "20170811142420454"
+        },
+        "$:/plugins/dcp/arxiv/author-list": {
+            "created": "20170812150138732",
+            "text": "\\define author-list()\n<$list filter=\"[list[!!authors]first[]]\"><$link><<currentTiddler>></$link></$list><$list filter=\"[list[!!authors]butfirst[]]\">, <$link><<currentTiddler>></$link></$list>\n\\end",
+            "title": "$:/plugins/dcp/arxiv/author-list",
+            "tags": "$:/tags/Macro",
+            "modified": "20170812150833678"
         }
     }
 }
