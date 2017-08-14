@@ -8375,7 +8375,7 @@ Error message and password prompt
 <div title="$:/isEncrypted" revision="0" bag="default">
 <pre>no</pre>
 </div>
-<div created="20170807093858562" description="A plugin for organising papers from the arxiv." modified="20170812150919017" plugin-type="plugin" title="$:/plugins/dcp/arxiv" type="application/json" version="0.0.13" revision="0" bag="default">
+<div created="20170807093858562" description="A plugin for organising papers from the arxiv." modified="20170814092520595" plugin-type="plugin" title="$:/plugins/dcp/arxiv" type="application/json" version="0.0.14" revision="0" bag="default">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/plugins/dcp/arxiv/paper-template&quot;: {
@@ -8509,6 +8509,16 @@ Error message and password prompt
             &quot;title&quot;: &quot;$:/plugins/dcp/arxiv/author-list&quot;,
             &quot;tags&quot;: &quot;$:/tags/Macro&quot;,
             &quot;modified&quot;: &quot;20170812150833678&quot;
+        },
+        &quot;$:/plugins/dcp/arxiv/DeleteNewButton&quot;: {
+            &quot;text&quot;: &quot;&lt;$list filter=\&quot;[all[current]tag[new]]\&quot;&gt;\n&lt;$button class=\&quot;tc-btn-invisible\&quot;&gt;\n&lt;$action-sendmessage $message=\&quot;tm-delete-tiddler\&quot;/&gt;\n{{$:/core/images/delete-button}}\n&lt;/$button&gt;\n&lt;/$list&gt;&quot;,
+            &quot;bag&quot;: &quot;default&quot;,
+            &quot;revision&quot;: &quot;1&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;title&quot;: &quot;$:/plugins/dcp/arxiv/DeleteNewButton&quot;,
+            &quot;tags&quot;: &quot;$:/tags/ViewToolbar&quot;,
+            &quot;modified&quot;: &quot;20170814092424276&quot;,
+            &quot;created&quot;: &quot;20170814091359600&quot;
         }
     }
 }</pre>

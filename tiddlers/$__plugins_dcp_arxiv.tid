@@ -1,10 +1,10 @@
 created: 20170807093858562
 description: A plugin for organising papers from the arxiv.
-modified: 20170812150919017
+modified: 20170814092520595
 plugin-type: plugin
 title: $:/plugins/dcp/arxiv
 type: application/json
-version: 0.0.13
+version: 0.0.14
 
 {
     "tiddlers": {
@@ -139,6 +139,16 @@ version: 0.0.13
             "title": "$:/plugins/dcp/arxiv/author-list",
             "tags": "$:/tags/Macro",
             "modified": "20170812150833678"
+        },
+        "$:/plugins/dcp/arxiv/DeleteNewButton": {
+            "text": "<$list filter=\"[all[current]tag[new]]\">\n<$button class=\"tc-btn-invisible\">\n<$action-sendmessage $message=\"tm-delete-tiddler\"/>\n{{$:/core/images/delete-button}}\n</$button>\n</$list>",
+            "bag": "default",
+            "revision": "1",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/plugins/dcp/arxiv/DeleteNewButton",
+            "tags": "$:/tags/ViewToolbar",
+            "modified": "20170814092424276",
+            "created": "20170814091359600"
         }
     }
 }
