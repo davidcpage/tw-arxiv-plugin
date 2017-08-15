@@ -1,10 +1,10 @@
 created: 20170807093858562
 description: A plugin for organising papers from the arxiv.
-modified: 20170814092520595
+modified: 20170815084807755
 plugin-type: plugin
 title: $:/plugins/dcp/arxiv
 type: application/json
-version: 0.0.14
+version: 0.0.15
 
 {
     "tiddlers": {
@@ -124,14 +124,15 @@ version: 0.0.14
             "created": "20170810113646314"
         },
         "$:/plugins/dcp/arxiv/get-by-id": {
+            "created": "20170811142420454",
             "text": "''arxiv IDs:'' <br>\n<$edit-text  tiddler=\"$:/plugins/dcp/arxiv/id_list\" field=\"value\"/> ,,space separated list,,\n\n<$button>\n<$action-getarxiv $id_list={{$:/plugins/dcp/arxiv/id_list!!value}}}/>\n<$action-navigate $to=\"$:/Import\"/>\nFetch from arxiv\n</$button>",
             "bag": "default",
             "revision": "1",
             "type": "text/vnd.tiddlywiki",
             "title": "$:/plugins/dcp/arxiv/get-by-id",
-            "tags": "",
-            "modified": "20170812132619035",
-            "created": "20170811142420454"
+            "tags": "$:/tags/SideBar",
+            "modified": "20170815084727994",
+            "caption": "Get by ID"
         },
         "$:/plugins/dcp/arxiv/author-list": {
             "created": "20170812150138732",
