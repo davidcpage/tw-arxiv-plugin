@@ -1,21 +1,21 @@
 created: 20170807093858562
 description: A plugin for organising papers from the arxiv.
-modified: 20170815092128580
+modified: 20170820132729275
 plugin-type: plugin
 title: $:/plugins/dcp/arxiv
 type: application/json
-version: 0.0.16
+version: 0.0.17
 
 {
     "tiddlers": {
         "$:/plugins/dcp/arxiv/paper-template": {
-            "created": "20170807092108167",
-            "text": "<<author-list>>\n\n{{!!abstract}}\n\n<$set name=\"url\" value={{!!link}}>\n<a class='tc-tiddlylink-external' target='_blank' href=<<url>>> pdf </a>\n</$set>",
+            "text": "<<author-list>>\n\n{{!!abstract}}\n\n<$list filter=\"[all[current]has[thumbnail]]\">\n<a href={{!!link}} target=\"_blank\"><$image source={{!!thumbnail}}></$image></a>\n</$list>\n\n<$list filter=\"[all[current]!has[thumbnail]]\">\n<a class='tc-tiddlylink' target='_blank' href={{!!link}}> pdf </a>\n</$list>",
             "bag": "default",
-            "revision": "5",
+            "revision": "0",
             "type": "text/vnd.tiddlywiki",
             "title": "$:/plugins/dcp/arxiv/paper-template",
-            "modified": "20170812150824521"
+            "modified": "20170820132516286",
+            "created": "20170807092108167"
         },
         "$:/plugins/dcp/arxiv/author-template": {
             "text": "\\define concat(str) $str$\n\nPapers:\n<ul>\n<$list filter=\"[regexp:authors<currentTiddler>]\">\n<li><$link><<currentTiddler>></$link></li>\n</$list>\n\n<$set name=\"aliases\" filter=[all[current]backlinks[]tag[alias]]>\n<$list filter=<<aliases>>>\n<$list filter=\"[regexp:authors<currentTiddler>]\">\n<li><$link><<currentTiddler>></$link></li>\n</$list>\n</$list>\n</$set>\n</ul>\n\n<$set name=\"url\" value=<<concat \"https://scholar.google.co.uk/scholar?hl=en&q=$(currentTiddler)$\">>>\n<a class=tc-tiddlylink href=<<url>> target=\"_blank\">Google scholar</a>\n</$set>",
